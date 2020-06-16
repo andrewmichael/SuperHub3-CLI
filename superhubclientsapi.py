@@ -46,6 +46,7 @@ parser.add_argument("-v", "--verbose", help="Enable verbose mode", action="store
 parser.add_argument("-d", "--diagnostic", help="View router status", action="store_true");
 parser.add_argument("-r", "--reboot", help="Reboot your router", action="store_true");
 parser.add_argument("-s", "--silent", help="Only output result. Note: Ensure desired operation in normal mode before invoking silent mode", action="store_true");
+parser.add_argument("-i", "--ip", help="Set the ip of the router", metavar="N");
 args = parser.parse_args();
 
 if args.verbose is True and args.silent is True:
@@ -62,7 +63,8 @@ if args.format is not None:
         set_list_mode = 0;
     else:
         raise Exception("Output format is not valid, see help -h");
-
+if args.ip:
+    superhub_ip_addr = args.ip;
 
 def printx(text="", verbosetype=1):
     """Prints text to the console
